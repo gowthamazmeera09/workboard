@@ -7,6 +7,7 @@ import UsersList from './screens/UsersList';
 import Help from './screens/Help';
 import Profile from './screens/Profile';
 import RazorpayScreen from './screens/RazorpayScreen';
+import Attendance from './screens/Attendance';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name="Help" component={Help} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Razorpay" component={RazorpayScreen} />
+        <Stack.Screen name="Attendance" component={Attendance} />
       </Stack.Navigator>
     </NavigationContainer>
   );

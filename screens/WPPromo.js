@@ -10,12 +10,12 @@ export default function WPPromo() {
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.title}>Join And Earn Money Daily!</Text>
+        <Text style={styles.title}>💼 Join & Earn Money Daily!</Text>
         <Text style={styles.description}>
-          Are you looking for a part-time job with great opportunities? Become a part of our trusted network of workers in various fields. With flexible daily and monthly roles, you can connect with clients who need your expertise. Join us today and start earning by offering your skills in a reliable, professional environment.
+          Looking for flexible work with real earnings? Join our trusted worker network and get hired for daily or monthly roles. Provide your skills, build your profile, and connect with real clients. Start today and secure daily income from verified opportunities!
         </Text>
         <TouchableOpacity onPress={handlePress} style={styles.button}>
-          <Text style={styles.buttonText}>CLICK HERE</Text>
+          <Text style={styles.buttonText}>🚀 START NOW</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -24,44 +24,48 @@ export default function WPPromo() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
-    paddingHorizontal: 16,
-    backgroundColor: '#f9fafb',
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    backgroundColor: '#FFFBEB', // soft gold-beige background
     alignItems: 'center',
   },
   box: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    elevation: 3,
+    backgroundColor: '#FFF8DC', // light gold card
+    borderRadius: 20,
+    padding: 24,
+    shadowColor: '#FFD700',
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 10,
+    elevation: 6,
+    width: '100%',
     maxWidth: 500,
+    borderWidth: 1,
+    borderColor: '#FBBF24',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#1e293b',
-    marginBottom: 12,
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginBottom: 14,
     textAlign: 'center',
   },
   description: {
     fontSize: 16,
-    color: '#4b5563',
-    marginBottom: 16,
+    color: '#374151',
+    marginBottom: 20,
+    lineHeight: 22,
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#1e293b',
-    paddingVertical: 10,
-    paddingHorizontal: 24,
+    backgroundColor: '#1E40AF', // deep blue
+    paddingVertical: 12,
+    paddingHorizontal: 28,
     borderRadius: 30,
     alignSelf: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
