@@ -111,7 +111,7 @@ export default function UsersList({ route }) {
     .sort((a, b) => a.distance - b.distance);
 
   const handlePay = (userId, isMonthly) => {
-    const amount = isMonthly ? 99 : 3;
+    const amount = isMonthly ? 90 : 3;
     navigation.navigate('Razorpay', { amount, userId, isMonthly, role });
   };
 
@@ -166,7 +166,7 @@ export default function UsersList({ route }) {
                 style={styles.payBtn}
                 onPress={() => handlePay(item._id, isMonthly)}
               >
-                <Text style={styles.payText}>Pay ₹{isMonthly ? '99' : '3'} to Unlock</Text>
+                <Text style={styles.payText}>Pay ₹{isMonthly ? '90' : '3'} to Unlock</Text>
               </TouchableOpacity>
             )}
 
