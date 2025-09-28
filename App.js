@@ -1,6 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+
+// screens
 import LandingPage from './screens/LandingPage';
 import Home from './screens/Home';
 import UsersList from './screens/UsersList';
@@ -13,16 +18,18 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage">
-        <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="UsersList" component={UsersList} />
-        <Stack.Screen name="Help" component={Help} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Razorpay" component={RazorpayScreen} />
-        <Stack.Screen name="Attendance" component={Attendance} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="LandingPage">
+          <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="UsersList" component={UsersList} />
+          <Stack.Screen name="Help" component={Help} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Razorpay" component={RazorpayScreen} />
+          <Stack.Screen name="Attendance" component={Attendance} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
