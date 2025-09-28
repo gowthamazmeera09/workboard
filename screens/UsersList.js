@@ -120,12 +120,17 @@ export default function UsersList({ route }) {
     .sort((a, b) => a.distance - b.distance);
 
   const handlePay = (userId, isMonthly) => {
+<<<<<<< HEAD
     const amount = isMonthly ? 30 : 1;
     navigation.navigate('Razorpay', {
       amount,
       userId,
       role, // make sure this is passed so RazorpayScreen can redirect back properly
     });
+=======
+    const amount = isMonthly ? 90 : 3;
+    navigation.navigate('Razorpay', { amount, userId, isMonthly, role });
+>>>>>>> fdef682fb2e77190792bd689d7779ede75734898
   };
 
   const renderUser = ({ item }) => {
@@ -175,8 +180,16 @@ export default function UsersList({ route }) {
                 </TouchableOpacity>
               </View>
             ) : (
+<<<<<<< HEAD
               <TouchableOpacity style={styles.payBtn} onPress={() => handlePay(item._id, isMonthly)}>
                 <Text style={styles.payText}>Pay ₹{isMonthly ? '30' : '1'} to Unlock</Text>
+=======
+              <TouchableOpacity
+                style={styles.payBtn}
+                onPress={() => handlePay(item._id, isMonthly)}
+              >
+                <Text style={styles.payText}>Pay ₹{isMonthly ? '90' : '3'} to Unlock</Text>
+>>>>>>> fdef682fb2e77190792bd689d7779ede75734898
               </TouchableOpacity>
             )}
 
