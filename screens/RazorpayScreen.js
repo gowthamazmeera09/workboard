@@ -1,48 +1,61 @@
+// screens/RazorpayScreen.js
 import React, { useEffect } from 'react';
+import { Alert } from 'react-native';
 import RazorpayCheckout from 'react-native-razorpay';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, ActivityIndicator, Alert } from 'react-native';
 
 export default function RazorpayScreen() {
-  const route = useRoute();
   const navigation = useNavigation();
-  const { amount, userId, role } = route.params;
+  const route = useRoute();
+  const { amount, userId, isMonthly, role, redirectTo } = route.params || {};
 
   useEffect(() => {
-    const startPayment = () => {
-      const options = {
-        description: 'Payment to unlock contact',
-        image: 'https://yourapp.com/logo.png', // optional
-        currency: 'INR',
-        key: 'rzp_live_OqzosWrCVboRcu', // ✅ Replace this with your real Razorpay key
-        amount: amount * 100, // amount in paise
-        name: 'WorkBoard',
-        prefill: {
-          email: 'user@example.com',
-          contact: '9876543210',
-        },
-        theme: { color: '#3399cc' },
-      };
+    if (!amount) return;
 
-      RazorpayCheckout.open(options)
-        .then(async (data) => {
-          const key = (amount === 90 ? `monthly_paid_${userId}_${role}` : `paid_${userId}_${role}`);
-          await AsyncStorage.setItem(key, Date.now().toString());
-          navigation.replace('UsersList', { role });
-        })
-        .catch((error) => {
-          Alert.alert('Payment Failed', error.description || 'Payment was not completed.');
-          navigation.goBack();
-        });
+    const options = {
+      description: isMonthly
+        ? 'Monthly Worker Subscription'
+        : 'Daily Worker Contact Unlock',
+      image: 'https://your-logo-url.com/logo.png',
+      currency: 'INR',
+      key: 'rzp_live_OqzosWrCVboRcu', // 🔑 replace with your Razorpay key
+      amount: amount * 100, // Razorpay expects paise
+      name: 'WorkBoard',
+      prefill: {
+        email: 'demo@demo.com',
+        contact: '9999999999',
+        name: 'WorkBoard User',
+      },
+      theme: { color: '#6D28D9' },
     };
 
-    startPayment();
+    RazorpayCheckout.open(options)
+      .then(async (data) => {
+        try {
+          const key = isMonthly
+            ? `monthly_paid_${userId}_${role}`
+            : `paid_${userId}_${role}`;
+
+          await AsyncStorage.setItem(key, Date.now().toString());
+
+          Alert.alert('Success', 'Payment Successful ✅');
+
+          // 🔄 Redirect after payment
+          if (redirectTo === 'Attendance') {
+            navigation.navigate('Attendance', { userId });
+          } else {
+            navigation.navigate('UsersList', { role });
+          }
+        } catch (err) {
+          console.log('Storage error:', err);
+        }
+      })
+      .catch((error) => {
+        Alert.alert('Payment Failed ❌', error.description || 'Try again later');
+        navigation.goBack();
+      });
   }, []);
 
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="#000" />
-    </View>
-  );
+  return null; // Razorpay opens modal, nothing to render
 }
